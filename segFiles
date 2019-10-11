@@ -1,0 +1,76 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.*;
+import java.util.Arrays;
+import org.apache.commons.io.FileUtils;
+
+public class GGSN {
+
+    public static void main(String[] args) {
+        long startTime = System.nanoTime();
+        File dir = new File("E:\\EMM (OCC&GGSN)\\Mediated Files\\GGSN");  // change
+        String[] fileNames = dir.list();
+        ArrayList<String> GGSNday09 = new ArrayList<>();
+        ArrayList<String> GGSNday10 = new ArrayList<>();
+        ArrayList<String> GGSNday11 = new ArrayList<>();
+        for (String fileName : fileNames) {
+            if (Integer.parseInt(fileName.substring(6, 8)) == 9) {
+                GGSNday09.add(fileName);
+            }
+            if (Integer.parseInt(fileName.substring(6, 8)) == 10) {
+                GGSNday10.add(fileName);
+            }
+            if (Integer.parseInt(fileName.substring(6, 8)) == 11) {
+                GGSNday11.add(fileName);
+            }
+        }
+
+
+//------------------------9th ------------------------------
+        System.out.println("Moving GGSN for 9th");
+        System.out.println("Total file:- " + GGSNday09.size());
+        for (String fName : GGSNday09) {
+            File source = new File("E:\\EMM (OCC&GGSN)\\Mediated Files\\GGSN\\" + fName);
+            File dest = new File("E:\\staging_ggsn\\nine_july\\" + fName);
+            try {
+                FileUtils.copyFile(source, dest);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+//------------------------10th ------------------------------
+        System.out.println("Moving GGSN for 10th");
+        System.out.println("Total file:- " + GGSNday10.size());
+        for (String fName : GGSNday10) {
+            File source = new File("E:\\EMM (OCC&GGSN)\\Mediated Files\\GGSN\\" + fName);
+            File dest = new File("E:\\staging_ggsn\\ten_july\\" + fName);
+            try {
+                FileUtils.copyFile(source, dest);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+//------------------------11th ------------------------------
+        System.out.println("Moving GGSN for 11th");
+        System.out.println("Total file:- " + GGSNday11.size());
+        for (String fName : GGSNday11) {
+            File source = new File("E:\\EMM (OCC&GGSN)\\Mediated Files\\GGSN\\" + fName);
+            File dest = new File("E:\\staging_ggsn\\eleven_july\\" + fName);
+            try {
+                FileUtils.copyFile(source, dest);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        long endTime = System.nanoTime();
+        System.out.println("Took:- " + (endTime - startTime) / 1000000000 + "to move");
+        
+    }
+
+}
