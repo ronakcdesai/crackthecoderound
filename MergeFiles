@@ -1,0 +1,40 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+
+public class MergeGGSN {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        long startTime = System.nanoTime();
+        File dir = new File("E:\\seven_days\\unzipping\\5\\ggsn");
+        String[] fileNames = dir.list();
+        String[] subArray;
+        int chunk = 1024;
+        for (int i = 0; i < fileNames.length; i += chunk) {
+            subArray = Arrays.copyOfRange(fileNames, i, Math.min(fileNames.length, i + chunk));
+            PrintWriter pw = new PrintWriter("E:\\seven_days\\merging\\5\\ggsn\\ggsn_day_5_" + i + ".txt");
+            for (String fileName : subArray) {
+                System.out.println("Reading from " + fileName);
+                File f = new File(dir, fileName);
+                BufferedReader br = new BufferedReader(new FileReader(f));
+                String line = br.readLine();
+                while (line != null) {
+                    pw.println(line);
+                    line = br.readLine();
+                }
+                pw.flush();
+                System.out.println("File :- " + fileName + " merged into file name ---->> output" + i + ".txt");
+            }
+            System.out.println("-----------------------------------------------------------------------------------");
+            System.out.println("Reading from chunk of " + chunk + " files from directory " + dir.getName() + " Status :- COMPLETED");
+            System.out.println("-----------------------------------------------------------------------------------");
+        }
+        long endTime = System.nanoTime();
+        System.out.println("Took:- " + (endTime - startTime) / 1000000000 + " seconds to merge " + fileNames.length + " files");
+
+    }
+    
+}
