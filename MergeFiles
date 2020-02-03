@@ -12,7 +12,7 @@ public class MergeGGSN {
         File dir = new File("E:\\seven_days\\unzipping\\5\\ggsn");
         String[] fileNames = dir.list();
         String[] subArray;
-        int chunk = 1024;
+        int chunk = 1024;         // number of files to be merged 
         for (int i = 0; i < fileNames.length; i += chunk) {
             subArray = Arrays.copyOfRange(fileNames, i, Math.min(fileNames.length, i + chunk));
             PrintWriter pw = new PrintWriter("E:\\seven_days\\merging\\5\\ggsn\\ggsn_day_5_" + i + ".txt");
